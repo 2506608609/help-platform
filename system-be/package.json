@@ -1,0 +1,18 @@
+{
+  "name": "system-be",
+  "version": "1.0.0",
+  "description": "服务端",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "毕设"
+  ],
+  "author": "fans",
+  "license": "ISC",
+  "dependencies": {
+    "koa": "^2.14.1",
+    "mongoose": "^7.0.0"
+  }
+}

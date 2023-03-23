@@ -4,7 +4,7 @@
   "description": "服务端",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon app.js"
   },
   "keywords": [
     "毕设"
@@ -12,7 +12,19 @@
   "author": "fans",
   "license": "ISC",
   "dependencies": {
+    "element-plus": "^2.3.1",
+    "jsonwebtoken": "^9.0.0",
     "koa": "^2.14.1",
-    "mongoose": "^7.0.0"
+    "koa-bodyparser": "^4.4.0",
+    "koa-jwt": "^4.0.4",
+    "koa-multer": "^1.0.2",
+    "koa-router": "^12.0.0",
+    "koa-static": "^5.0.0",
+    "koa-views": "^8.0.0",
+    "koa2-cors": "^2.0.6",
+    "mkdirp": "^2.1.5",
+    "mongoose": "^7.0.0",
+    "nodemon": "^2.0.21",
+    "path": "^0.12.7"
   }
 }

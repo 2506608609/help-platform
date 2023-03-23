@@ -1,9 +1,18 @@
 <template>
- <router-link to="/home">登录</router-link> |
-  <router-link to="/logon">注册</router-link>
-
-  <router-view />
+ 
+    <router-view></router-view>
+  
 </template>
 
-<style lang="scss">
+<script>
+export default {};
+</script>
+
+<style>
+body,
+html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
 </style>

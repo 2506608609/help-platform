@@ -40,8 +40,8 @@ export default {
     return {
       // 这是登录表单的数据绑定对象
       loginForm: {
-        username: "1",
-        password: "1234",
+        username: "eason",
+        password: "123456",
       },
       // 这是表单的验证规则对象
       loginFormRules: {
@@ -51,7 +51,7 @@ export default {
           {
             min: 1,
             max: 10,
-            message: "长度在 1 到 10 个字符",
+            message: "长度在 5 到 10 个字符",
             trigger: "blur",
           },
         ],
@@ -61,7 +61,7 @@ export default {
           {
             min: 1,
             max: 15,
-            message: "长度在 1到 15 个字符",
+            message: "长度在 6到 15 个字符",
             trigger: "blur",
           },
         ],

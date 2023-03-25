@@ -86,7 +86,7 @@ export default {
     };
   },
   created() {
-    console.log(this.$store.state.user.state);
+    // console.log(this.$store.state.user.state);
     this.form = this.$store.state.user.state;
   },
   methods: {

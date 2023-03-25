@@ -68,15 +68,24 @@ const routes = [
           title: '发布求助'
         }
       },
+      {
+        path: '/admin/helpmsg/updateHelpmsg',
+        name: 'updateHelpmsg',
+        component: () => import('@/views/Helpmsg/update.vue'),
+        meta: {
+          title: '修改求助'
+        }
+      },
 
     ]
 
   }, {
-    path: '/',
+    path: '/login',
     name: 'Login',
     component: () => import('@/views/Login')
   },
-
+  //重定位到登录页
+  { path: '/', redirect: '/login' },
 ]
 
 const router = new VueRouter({

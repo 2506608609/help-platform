@@ -9,7 +9,7 @@
         >
         <el-avatar size="medium" :src="avatar_url"></el-avatar>
         <el-link :underline="false">{{ username }}</el-link>
-        <el-link :underline="false">退出</el-link>
+        <el-link :underline="false" @click="isexit" >退出</el-link>
       </div>
     </el-header>
     <el-container>
@@ -27,13 +27,17 @@
             <el-menu-item index="/admin/users/personal">个人资料</el-menu-item>
             <el-menu-item index="/admin/users/password">修改密码</el-menu-item>
           </el-submenu>
-          <el-submenu index="/admin/notice">
+
+
+          <el-submenu v-if=admin    index="/admin/notice">
             <template slot="title">
               <span>公告管理</span>
             </template>
             <el-menu-item index="/admin/notice/add"> 发布公告</el-menu-item>
             <el-menu-item index="/admin/notice/del">整整公告</el-menu-item>
           </el-submenu>
+
+
           <el-submenu index="/admin/helpmsg">
             <template slot="title">
               <span>求助管理</span>
@@ -61,18 +65,52 @@
 </template>
 
 <script>
+
+
 export default {
   data() {
     return {
+      admin:false,
       username: window.localStorage.getItem("username"),
       avatar_url: window.localStorage.getItem("avatar"),
     };
   },
+  created() {
+    console.log("created 执行了");
+    this.admin = this.$store.state.user.state.admin;
+    console.log(this.admin);
+  },
   beforeDestroy() {
-    console.log("beforeDestory 执行了");
+    // console.log("beforeDestory 执行了");
     this.avatar_url = window.localStorage.getItem("avatar");
   },
-};
+  methods: {
+    isexit() {
+      this.$confirm("确定退出吗？", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
+      })
+        .then(() => {
+          this.$message({
+            type: "success",
+            message: "退出成功!",
+          });
+          window.localStorage.removeItem("token");
+          window.localStorage.removeItem("username");
+          window.localStorage.removeItem("avatar");
+          this.$router.push("/login");
+        })
+        .catch(() => {
+          this.$message({
+            type: "info",
+            message: "已取消退出",
+          });
+        });
+    },
+  },
+  }
+ 
 </script>
 
 <style>

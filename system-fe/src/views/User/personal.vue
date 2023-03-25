@@ -121,7 +121,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .small-img {
   width: 120px;
   height: 120px;
@@ -129,13 +129,25 @@ export default {
   border-radius: 50%;
   z-index: 99;
 }
+
 .avatar-div {
   display: flex;
   align-items: center;
   /* justify-content: center; */
 }
 .el-form-item {
-  /* text-align: center; */
+ 
   margin-left: 40px;
+  
+}
+/*input框样式*/ 
+
+.el-input ::v-deep .el-input__inner {
+  color: #ffffff;
+  background-color:rgba(255, 255, 255, 0.1);
+}
+::v-deep .el-textarea__inner{
+ color: #ffffff;
+  background-color:rgba(255, 255, 255, 0.1);
 }
 </style>

@@ -34,6 +34,40 @@ const routes = [
           title: "修改密码",
         },
       },
+      
+      
+      {
+        path: '/admin/notice/add',
+        name: 'Hnoticemsgadd',
+        component: () => import('@/views/Hnotice/add.vue'),
+        meta: {
+          title: '发布公告'
+        }
+      },
+      {
+        path: '/admin/notice/del',
+        name: 'Hnoticemsgdel',
+        component: () => import('@/views/Hnotice/del.vue'),
+        meta: {
+          title: '整整公告'
+        }
+      },
+      {
+        path: '/admin/helpmsg/list',
+        name: 'Helpmsglist',
+        component: () => import('@/views/Helpmsg/index.vue'),
+        meta: {
+          title: '求助列表'
+        }
+      },
+      {
+        path: '/admin/helpmsg/add',
+        name: 'Helpmsgadd',
+        component: () => import('@/views/Helpmsg/add.vue'),
+        meta: {
+          title: '发布求助'
+        }
+      },
 
     ]
 
@@ -42,79 +76,6 @@ const routes = [
     name: 'Login',
     component: () => import('@/views/Login')
   },
-
-
-  //   path: "/home",
-  //   name: "Home",
-  //   component: () => import("../views/Home"),
-  //   redirect: "/admin/users/personal",
-  //   children: [
-  //     {
-  //       path: "/admin/users/personal",
-  //       name: "UserPersonal",
-  //       component: () => import("../views/User/personal.vue"),
-  //       meta: {
-  //         title: "个人资料",
-  //       },
-  //     },
-  //     {
-  //       path: "/admin/users/password",
-  //       name: "UserPassword",
-  //       component: () => import("@/views/User/password.vue"),
-  //       meta: {
-  //         title: "修改密码",
-  //       },
-  //     },
-  // {
-  //   path: "/admin/article",
-  //   name: "AdminArticle",
-  //   component: () => import("@/views/Article"),
-  //   meta: {
-  //     title: "文章列表",
-  //   },
-  // },
-  // {
-  //   path: "/admin/article/add",
-  //   name: "ArticleAdd",
-  //   component: () => import("@/views/Article/add.vue"),
-  //   meta: {
-  //     title: "发布文章",
-  //   },
-  // },
-  // {
-  //   path: "/admin/article/update",
-  //   name: "ArticleUpdate",
-  //   component: () => import("@/views/Article/update.vue"),
-  //   meta: {
-  //     title: "编辑文章",
-  //   },
-  // },
-  // {
-  //   path: "/admin/comment",
-  //   name: "Comment",
-  //   component: () => import("@/views/Comment"),
-  //   meta: {
-  //     title: "评论管理",
-  //   },
-  // },
-  // {
-  //   path: "/admin/fans",
-  //   name: "Fans",
-  //   component: () => import("@/views/Fans"),
-  //   meta: {
-  //     title: "粉丝管理",
-  //   },
-  // },
-  // {
-  //   path: "/admin/star",
-  //   name: "Star",
-  //   component: () => import("@/views/Star"),
-  //   meta: {
-  //     title: "点赞管理",
-  //   },
-  // },
-  // ],
-  // },
 
 ]
 

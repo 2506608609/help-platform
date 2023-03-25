@@ -27,10 +27,10 @@ router.post('/reg', reg)
 router.post('/verify', verify)
 //修改密码
 router.post('/update/pwd', updatePwd)
-router.post('/update/personal', updatePersonal)
+
 
 //修改用户个人资料
-
+router.post('/update/personal', updatePersonal)
 
 
 

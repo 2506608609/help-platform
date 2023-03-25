@@ -13,14 +13,14 @@
         <el-form-item prop="username">
           <el-input
             v-model="loginForm.username"
-            prefix-icon="iconfont icon-user"
+            prefix-icon="el-icon-user"
           ></el-input>
         </el-form-item>
         <!-- 密码 -->
         <el-form-item prop="password">
           <el-input
             v-model="loginForm.password"
-            prefix-icon="iconfont icon-3702mima"
+            prefix-icon="el-icon-unlock"
             type="password"
           ></el-input>
         </el-form-item>
@@ -130,13 +130,13 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .login_container {
   width: 100%;
   height: 100%;
   /*如果想做背景图片 可以给标签一个class 直接添加背景图*/
   position: relative;
-  background: url("../../assets/bg3.jpg") no-repeat;
+  background: url("../../assets/bg.jpg") no-repeat;
   background-size: 100% 100%;
 
   /* background-color: #3e3e3e; */
@@ -149,7 +149,7 @@ export default {
 .login_box {
   width: 400px;
   height: 270px;
-  background: hsla(0, 0%, 100%, 0.3);
+  background: hsla(0, 0%, 100%, 0.1);
   border: 1px solid #f7f7f7;
   border-radius: 5px;
   border-radius: 3px;
@@ -198,4 +198,9 @@ export default {
   display: flex;
   justify-content: flex-end;
 }
+.el-input ::v-deep .el-input__inner {
+  color: #ffffff;
+  background-color:rgba(255, 255, 255, 0.1);
+}
+
 </style>

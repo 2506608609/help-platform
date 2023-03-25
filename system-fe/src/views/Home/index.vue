@@ -1,11 +1,4 @@
-<!--
- * @Descripttion: 
- * @version: 
- * @Author: CoderHD
- * @Date: 2021-10-26 21:29:58
- * @LastEditors: CoderHD
- * @LastEditTime: 2021-10-30 00:20:44
--->
+
 <template>
   <el-container>
     <el-header>
@@ -21,7 +14,12 @@
     </el-header>
     <el-container>
       <el-aside width="200px">
-        <el-menu :router="true" active-text-color="#ffd04b">
+        <el-menu
+          :router="true"
+          active-text-color="#fff"
+          background-color="black"
+          text-color="#fff"
+        >
           <el-submenu index="/admin/users">
             <template slot="title">
               <span>个人中心</span>
@@ -29,12 +27,19 @@
             <el-menu-item index="/admin/users/personal">个人资料</el-menu-item>
             <el-menu-item index="/admin/users/password">修改密码</el-menu-item>
           </el-submenu>
-          <el-submenu index="/admin/article">
+          <el-submenu index="/admin/notice">
+            <template slot="title">
+              <span>公告管理</span>
+            </template>
+            <el-menu-item index="/admin/notice/add"> 发布公告</el-menu-item>
+            <el-menu-item index="/admin/notice/del">整整公告</el-menu-item>
+          </el-submenu>
+          <el-submenu index="/admin/helpmsg">
             <template slot="title">
               <span>求助管理</span>
             </template>
-            <el-menu-item index="/admin/article/add">发布求助</el-menu-item>
-            <el-menu-item index="/admin/article">求助列表</el-menu-item>
+            <el-menu-item index="/admin/helpmsg/add">发布求助</el-menu-item>
+            <el-menu-item index="/admin/helpmsg/list">求助列表</el-menu-item>
           </el-submenu>
           <el-menu-item index="/admin/comment">
             <template slot="title">
@@ -44,11 +49,6 @@
           <el-menu-item index="/admin/fans">
             <template slot="title">
               <span>关注管理</span>
-            </template>
-          </el-menu-item>
-          <el-menu-item index="/admin/star">
-            <template slot="title">
-              <span>点赞管理</span>
             </template>
           </el-menu-item>
         </el-menu>
@@ -100,10 +100,10 @@ export default {
 .el-header div {
   display: flex;
   align-items: center;
-  
 }
 .el-header div span {
-    display: flex;
+   color: #ffffff;
+  display: flex;
   align-items: center;
   width: 60px;
   height: 60px;
@@ -111,23 +111,28 @@ export default {
   margin-right: 15px;
   margin-left: 15px;
 }
+/*设置整个侧边layout的背景色*/
+
 .el-aside {
-background-color: #eaedf1;
+  background-color: black;
 }
 .el-aside .el-menu {
   border-right: none;
-  
-  background-color: #eaedf1;
 }
 .el-main {
-  background-color: #fff;
+  /* background-color: #fff; */
+
+  background-image: url(../../assets/bg.jpg);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .toggle-button {
   background-color: #4a5064;
   font-size: 10px;
   line-height: 24px;
-  color:pink;
+  color: pink;
   text-align: center;
   letter-spacing: 0.2 em;
   cursor: pointer;

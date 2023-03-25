@@ -38,5 +38,18 @@ router.post('/img', upload.single('myfile'), async ctx => {
         data: url
     };
 });
+//富文本编辑器上传图片
+router.post('/editor/img', upload.single('editorfile'), async ctx => {
+    const filePath = ctx.req.file.path.replace('public', '');
+    const path= ctx.origin + filePath;
+    ctx.body = {
+        errno: 0,
+        data: [{
+            url: path ,
+            alt: '',
+            href: ''
+        }]
+    };
+});
 
 module.exports = router;

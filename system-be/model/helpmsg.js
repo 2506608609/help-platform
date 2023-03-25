@@ -7,7 +7,7 @@ let helpmsgSchema = new Schema({
     title: String,  //标题
     createTime: String,  //发布时间
     content: String,  //内容
-    classify: Number,  //分类
+    classify: String,  //分类
     author: String,   //发布者
 
 });

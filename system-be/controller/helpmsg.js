@@ -63,6 +63,8 @@ const findAllHelpmsg = async ctx => {
 
     //启始位置计算
     let start = (page - 1) * pageSize
+
+    //分段查询函数
     await Helpmsg.find({ author }).skip(start).limit(pageSize).then(rel => {
         if (rel) {
             ctx.body = {
@@ -72,6 +74,8 @@ const findAllHelpmsg = async ctx => {
                 totapage,
                 page,
                 pageSize,
+                count,
+                author,
 
 
             }

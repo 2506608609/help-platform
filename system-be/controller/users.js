@@ -22,7 +22,7 @@ const login = async ctx => {
 
                 code: 200,
                 msg: '登陆成功',
-
+                
                 token,
                 rel
             }

@@ -1,6 +1,10 @@
 let mongoose = require('mongoose')
 let schema = new mongoose.Schema({
     username: String,
+    admin: {
+        type: Boolean,
+        default: false
+    },
     password: {
         type: String,
         select: false
@@ -26,6 +30,8 @@ let schema = new mongoose.Schema({
         type: String,
         defaule: ''
     },
+    
+    
 })
 
 

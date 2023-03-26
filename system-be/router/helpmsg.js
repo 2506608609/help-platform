@@ -4,6 +4,8 @@ let {
     findOneHelpmsg,
     updateHelpmsg,
     deleteHelpmsg,
+    findAllHelpmsgAdmin
+
 } = require('../controller/helpmsg.js')
 const router = require('koa-router')()
 router.prefix('/helpmsg')
@@ -32,4 +34,10 @@ router.post('/updateHelpmsg', updateHelpmsg)
 
 //删除信息
 router.post('/deleteHelpmsg', deleteHelpmsg)
+
+
+
+
+//管理员查询所有信息
+router.get('/findAllHelpmsg/admin',findAllHelpmsgAdmin)
 module.exports=router

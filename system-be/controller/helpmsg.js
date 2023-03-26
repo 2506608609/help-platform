@@ -180,6 +180,36 @@ const deleteHelpmsg = async ctx => {
     })
 }
 
+//管理员查询模块
+const findAllHelpmsgAdmin = async (ctx) => {
+    try {
+        const page = parseInt(ctx.query.page) || 1
+        const pageSize = 5
+
+        const count = await Helpmsg.countDocuments()
+        const totalPage = Math.ceil(count / pageSize)
+
+        const start = (page - 1) * pageSize
+
+        const helpmsgs = await Helpmsg.find().skip(start).limit(pageSize)
+
+        ctx.body = {
+            code: 200,
+            msg: '查询成功',
+            helpmsgs,
+            totalPage,
+            page,
+            pageSize,
+            count,
+        }
+    } catch (err) {
+        ctx.body = {
+            code: 500,
+            msg: '查询出现了异常捏',
+            err,
+        }
+    }
+}
 
 
 module.exports = {
@@ -187,5 +217,6 @@ module.exports = {
     findAllHelpmsg,
     findOneHelpmsg,
     updateHelpmsg,
-    deleteHelpmsg
+    deleteHelpmsg,
+    findAllHelpmsgAdmin
 }

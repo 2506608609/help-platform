@@ -18,6 +18,7 @@ MongoConnect()
 const user = require('./router/users')
 const upload = require('./router/upload')
 const helpmsg = require('./router/helpmsg')
+const hnotice = require('./router/hnotice')
 
 
 
@@ -47,6 +48,7 @@ app.use(koajwt({
 app.use(user.routes(), user.allowedMethods)
 app.use(upload.routes(), upload.allowedMethods)
 app.use(helpmsg.routes(), helpmsg.allowedMethods)
+app.use(hnotice.routes(), hnotice.allowedMethods)
 
 
 

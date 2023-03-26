@@ -207,12 +207,49 @@ const updatePersonal = async ctx => {
         })
 }
 
+//查询所有用户
+const findAll = async ctx => {
+    await Users.find().then(rel => {
+        ctx.body = {
+            code: 200,
+            msg: '查询成功',
+            rel
+        }
+    }).catch(err => {
+        ctx.body = {
+            code: 500,
+            msg: '查询异常',
+            err
+        }
+    })
+}
 
+//查询单个用户接口
+const findOne = async ctx => {
+    let { username } = ctx.query
+    await Users.findOne({username}).then(rel => {
+        ctx.body = {
+            code: 200,
+            msg: '查询成功',
+            rel,
+            
+        }
+    }).catch(err => {
+        ctx.body = {
+            code: 500,
+            msg: '查询异常',
+            err
+        }
+    })
+}
 module.exports = {
     login,
     reg,
     verify,
     updatePwd,
     updatePersonal,
+    findAll,
+    findOne,
+
 
 }

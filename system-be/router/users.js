@@ -3,7 +3,9 @@ const {
     reg,
     verify,
     updatePwd, 
-    updatePersonal
+    updatePersonal,
+    findAll,
+    findOne,
 
 } = require('../controller/users')
 const router = require('koa-router')()
@@ -34,7 +36,12 @@ router.post('/update/personal', updatePersonal)
 
 
 
+//查询所有用户
+router.get('/find/all', findAll)
 
+
+//查询单个用户
+router.get('/find/one', findOne)
 
 
 

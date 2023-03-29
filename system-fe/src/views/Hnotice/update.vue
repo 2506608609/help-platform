@@ -2,16 +2,12 @@
   <div>
     <el-form label-width="100px">
       <el-form-item label="标题">
-        <el-input v-model="form.title" autofocus="true" placeholder="请输入标题" />
+        <el-input type="" v-model="form.title" placeholder="请输入标题" />
       </el-form-item>
       <el-form-item label="内容">
         <div id="editor"></div>
       </el-form-item>
-      <el-form-item label="类型">
-        <el-radio v-model="form.classify" label="求助">求助</el-radio>
-        <el-radio v-model="form.classify" label="分享">分享</el-radio>
-        <el-radio v-model="form.classify" label="交流">交流</el-radio>
-      </el-form-item>
+     
       <el-form-item>
         <el-button type="success" round @click="submit">更新</el-button>
       </el-form-item>
@@ -25,28 +21,26 @@ export default {
   data() {
     return {
       form: {
-        id: 0,
         _id: "",
         title: "",
-      
-        author: window.localStorage.getItem("username"),
         content: "",
       },
       editor: null,
     };
   },
   created() {
-    let id = this.$route.query.id;
+      let _id = this.$route.query._id;
+    // console.log(_id);
     //此处代码为异步请求，该代码中的then会在mounted中代码之后，但是该钩子函数已经失效了，所以
     this.$http({
-      path: "/helpmsg/findOneHelpmsg",
-      method: "get",
+      path: "/hnotice/findOneHnotice",
+      method: "post",
       params: {
-        id,
+        _id,
       },
     }).then((res) => {
       console.log(res.data);
-      this.form = res.data.result;
+      this.form = res.data.rel;
       // this.form.content=res.data.result.content
       console.log("created come out");
     });
@@ -82,17 +76,20 @@ export default {
       let content = this.editor.txt.html();
       // console.log(content)
       this.$http({
-        path: "/helpmsg/updateHelpmsg",
+        path: "/hnotice/updateHnotice",
         method: "post",
         params: {
-          id: this.form.id,
+          _id: this.form._id,
           title: this.form.title,
           // createTime:`${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`,
-          stemfrom: this.form.stemfrom,
+          
           content,
-          // author:this.form.author,
+          
         },
       }).then((res) => {
+        //刷新页面返回原路径  
+         this.$router.push("/admin/notice/del")
+          
         this.$message({
           message: res.data.msg,
           type: res.data.code === 200 ? "success" : "error",

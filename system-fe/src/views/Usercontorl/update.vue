@@ -4,32 +4,25 @@
     <el-form>
       <el-form-item>
         <el-col :span="8"
-          ><el-input v-model="username" disabled placeholder="用户名"></el-input
+          ><el-input
+            v-model="form.username"
+            disabled
+            placeholder="用户名"
+          ></el-input
         ></el-col>
       </el-form-item>
       <el-form-item
         ><el-col :span="8"
           ><el-input
-            v-model="password"
-            type="password"
-             show-password
+            v-model="form.password"
+            type="text"
             placeholder="请输入密码"
-          ></el-input
-        ></el-col>
-      </el-form-item>
-      <el-form-item
-        ><el-col :span="8">
-          <el-input
-            v-model="password1"
-            type="password"
-             show-password
-            placeholder="请再次输入密码"
           ></el-input
         ></el-col>
       </el-form-item>
 
       <el-form-item>
-        <el-button type="success" @click="save" round>更新密码</el-button>
+        <el-button type="success" @click="save" round>修改密码</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -39,24 +32,40 @@
 export default {
   data() {
     return {
-      username: localStorage.getItem("username"),
-      password: "",
-      password1: "",
-
+      form: {
+        username: "",
+        password: "",
+      },
       //  输入框正则验证
     };
+  },
+  created() {
+    let username = this.$route.query.username;
+    console.log(username);
+    this.$http({
+      path: "/users/find/one",
+      method: "get",
+      params: {
+        username: username,
+      },
+    }).then((res) => {
+      console.log(res.data);
+      this.form = res.data.rel;
+      // this.form.content=res.data.result.content
+      // console.log("created come out");
+    });
   },
   methods: {
     save() {
       // console.log(this.password);
       // console.log(this.username);
-      if (this.password === this.password1 && this.password) {
+      
         this.$http({
           path: "users/update/pwd",
           method: "post",
           params: {
-            username: this.username,
-            password: this.password,
+            username: this.form.username,
+            password: this.form.password,
           },
         }).then((res) => {
           this.$message({
@@ -64,11 +73,13 @@ export default {
             offset: 300,
             message: res.data.msg,
             type: res.data.code === 200 ? "success" : "error",
+
+          
           });
+          this.$router.push("/admin/usercontrol/list");
         });
-      } else {
-        this.$message("两次密码不一样哦,或者密码为空");
-      }
+  
+
     },
   },
 };

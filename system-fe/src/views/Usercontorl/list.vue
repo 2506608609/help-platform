@@ -1,21 +1,20 @@
 <template>
   <div>
-    <el-table :data="hnotice" style="width: 100%" class="table">
-      <el-table-column label="标题" prop="title"></el-table-column>
+    <el-table :data="users" style="width: 100%" class="table">
+      <el-table-column label="用户名" prop="username"></el-table-column>
       <el-table-column label="时间" prop="createTime"></el-table-column>
-      <el-table-column label="内容" prop="content">
-        <template slot-scope="scope">
-          <div v-html="scope.row.content"></div>
-        </template>
-      </el-table-column>
+      <el-table-column label="性别" prop="gender"></el-table-column>
+      <el-table-column label="邮箱" prop="email"></el-table-column>
+      <el-table-column label="电话" prop="phone"></el-table-column>
+      <el-table-column label="密码" prop="password"></el-table-column>
       <el-table-column label="操作">
         <template slot-scope="scope">
           
           <el-button @click="update(scope.row)" type="text" size="small"
-            >编辑</el-button
+            >修改密码</el-button
           >
           <el-button @click="del(scope.row)" type="text" size="small"
-            >删除</el-button
+            >注销用户</el-button
           >
         </template>
       </el-table-column>
@@ -39,7 +38,7 @@
 export default {
   data() {
     return {
-      hnotice: [],
+      users: [],
       page: 1,
       pageSize: 0,
       count: 0,
@@ -47,46 +46,42 @@ export default {
   },
   created() {
     this.getData();
-    console.log('开始了');
-    console.log(this.hnotice);
   },
-
   methods: {
     getData() {
       this.$http({
-        path: "/hnotice/findHnotice",
+        path: "/users/find/all",
         method: "get",
         params: {
           page: this.page,
           //   author: window.localStorage.getItem("username"),
         },
       }).then((res) => {
-        // console.log(res.data);
-        this.hnotice = res.data.hnotice;
+        // console.log(res.data.users);
+        this.users = res.data.users;
         this.pageSize = res.data.pageSize;
         this.count = res.data.count;
         this.page = res.data.page;
-        console.log(this.hnotice);
       });
     },
     update(row) {
       this.$router.push({
-        path: "/admin/notice/update",
+        path: "/admin/usercontrol/update",
         query: {
-          _id: row._id,
+          username: row.username,
         },
       });
     },
     del(row) {
       //此处的row即为所有的信息（）
     //   console.log(row._id);
-      this.$confirm("确定要删除吗？", "提示", {
-        confirmButtonText: "删除",
+      this.$confirm("确定要注销吗？", "提示", {
+        confirmButtonText: "注销",
         cancelButtonText: "取消",
         type: "warning",
       }).then(() => {
         this.$http({
-          path: "/hnotice/deleteHnotice",
+          path: "/users/del",
           method: "post",
           params: {
             _id: row._id,
@@ -120,6 +115,7 @@ export default {
   },
 };
 </script >
+
 
 <style lang="scss" scoped>
 

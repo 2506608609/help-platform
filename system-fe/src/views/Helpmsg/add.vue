@@ -10,7 +10,7 @@
       <el-form-item label="类型">
         <el-radio v-model="form.classify" label="求助">求助</el-radio>
         <el-radio v-model="form.classify" label="分享">分享</el-radio>
-        <el-radio v-model="form.classify" label="交流">交流</el-radio>
+        <!-- <el-radio v-model="form.classify" label="交流">交流</el-radio> -->
       </el-form-item>
       <el-form-item>
         <el-button type="success" round @click="submit">发布</el-button>
@@ -31,6 +31,7 @@ export default {
         content: "",
         classify: "",
         author: this.$store.state.user.state.username,
+        avatar: window.localStorage.getItem("avatar"),
       },
       editor: null,
     };
@@ -50,6 +51,8 @@ export default {
     };
     //设置高度
     this.editor.config.height = 500;
+    
+    
     // 配置提示文字
     this.editor.config.placeholder = "请输入内容";
 
@@ -73,6 +76,7 @@ export default {
           content: content,
           classify: this.form.classify,
           author: this.form.author,
+          avatar: this.form.avatar,
         },
       }).then((res) => {
         this.$message({
@@ -85,5 +89,18 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
+ ::v-deep .el-input__inner {
+  color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+ ::v-deep .el-radio__inner{
+   color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+::v-deep .w-e-text-container{
+   color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.1);
+}
 </style>

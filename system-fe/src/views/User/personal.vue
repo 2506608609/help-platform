@@ -1,11 +1,4 @@
-<!--
- * @Descripttion: 
- * @version: 
- * @Author: CoderHD
- * @Date: 2021-10-26 21:32:54
- * @LastEditors: CoderHD
- * @LastEditTime: 2021-10-30 00:19:36
--->
+
 <template>
   <div>
     <!-- form表单 -->
@@ -113,7 +106,7 @@ export default {
         });
       });
 
-      console.log(this.$store.state.user.state);
+      // console.log(this.$store.state.user.state);
       //刷新页面
       this.$router.go(0);
     },

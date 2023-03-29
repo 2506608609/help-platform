@@ -1,16 +1,20 @@
 <template>
   <div>
-    <el-table :data="hnotice" style="width: 100%" class="table">
+    <el-table :data="helpmsgs" style="width: 100%" class="table">
       <el-table-column label="标题" prop="title"></el-table-column>
       <el-table-column label="时间" prop="createTime"></el-table-column>
+      <el-table-column label="类型" prop="classify"></el-table-column>
       <el-table-column label="内容" prop="content">
         <template slot-scope="scope">
           <div v-html="scope.row.content"></div>
         </template>
       </el-table-column>
+
+      <el-table-column label="状态" prop=""></el-table-column>
+      <el-table-column label="发布人" prop="author"></el-table-column>
       <el-table-column label="操作">
         <template slot-scope="scope">
-          
+          <!-- <el-button type="text" size="small">查看</el-button> -->
           <el-button @click="update(scope.row)" type="text" size="small"
             >编辑</el-button
           >
@@ -39,7 +43,7 @@
 export default {
   data() {
     return {
-      hnotice: [],
+      helpmsgs: [],
       page: 1,
       pageSize: 0,
       count: 0,
@@ -47,14 +51,11 @@ export default {
   },
   created() {
     this.getData();
-    console.log('开始了');
-    console.log(this.hnotice);
   },
-
   methods: {
     getData() {
       this.$http({
-        path: "/hnotice/findHnotice",
+        path: "/helpmsg/findAllHelpmsg/admin",
         method: "get",
         params: {
           page: this.page,
@@ -62,38 +63,37 @@ export default {
         },
       }).then((res) => {
         // console.log(res.data);
-        this.hnotice = res.data.hnotice;
+        this.helpmsgs = res.data.helpmsgs;
         this.pageSize = res.data.pageSize;
         this.count = res.data.count;
         this.page = res.data.page;
-        console.log(this.hnotice);
       });
     },
     update(row) {
       this.$router.push({
-        path: "/admin/notice/update",
+        path: "/admin/helpmsg/updateHelpmsg",
         query: {
-          _id: row._id,
+          id: row.id,
         },
       });
     },
     del(row) {
       //此处的row即为所有的信息（）
-    //   console.log(row._id);
+      console.log(row);
       this.$confirm("确定要删除吗？", "提示", {
         confirmButtonText: "删除",
         cancelButtonText: "取消",
         type: "warning",
       }).then(() => {
         this.$http({
-          path: "/hnotice/deleteHnotice",
+          path: "/helpmsg/deleteHelpmsg",
           method: "post",
           params: {
-            _id: row._id,
+            id: row.id,
           },
         })
           .then((res) => {
-            // console.log(res);
+            console.log(res);
             this.$message({
               //提示栏中信息提示：
               message: res.data.msg,
@@ -122,6 +122,19 @@ export default {
 </script >
 
 <style lang="scss" scoped>
+
+// ::v-deep.el-table thead {
+//   color: #FC5531;
+//   background-color: rgba(255, 255, 255, 0.1);
+// }
+// ::v-deep .el-table tr{
+//     background-color:black 
+// }
+
+
+
+
+
 
 /* 整个表格的宽度 */
 .tableBox {

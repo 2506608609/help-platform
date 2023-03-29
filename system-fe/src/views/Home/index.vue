@@ -2,14 +2,17 @@
 <template>
   <el-container>
     <el-header>
-      <div class="sys-title">后台管理系统</div>
+      <div class="sys-title" v-if="admin">后台管理系统</div>
+      <div class="sys-title" v-if="!admin">个人中心</div>
       <div class="header-right">
         <el-link :underline="false" style="margin-right: 20px"
+        @click="toHome"
           >网站首页</el-link
         >
         <el-avatar size="medium" :src="avatar_url"></el-avatar>
+        <span v-show="admin">管理员:</span>
         <el-link :underline="false">{{ username }}</el-link>
-        <el-link :underline="false" @click="isexit" >退出</el-link>
+        <el-link :underline="false" @click="isexit">退出</el-link>
       </div>
     </el-header>
     <el-container>
@@ -20,6 +23,16 @@
           background-color="black"
           text-color="#fff"
         >
+
+          <el-submenu v-if="admin" index="/admin/usercontrol">
+            <template slot="title">
+              <span>用户管理</span>
+            </template>
+            <el-menu-item index="/admin/usercontrol/add">用户添加</el-menu-item>
+            <el-menu-item index="/admin/usercontrol/list">用户列表</el-menu-item>
+          </el-submenu>
+
+
           <el-submenu index="/admin/users">
             <template slot="title">
               <span>个人中心</span>
@@ -29,7 +42,8 @@
           </el-submenu>
 
 
-          <el-submenu v-if=admin    index="/admin/notice">
+          <!-- 管理员专属组件 -->
+          <el-submenu v-if="admin" index="/admin/notice">
             <template slot="title">
               <span>公告管理</span>
             </template>
@@ -38,26 +52,35 @@
           </el-submenu>
 
 
-          <el-submenu index="/admin/helpmsg">
+          <el-submenu v-if="!admin" index="/admin/helpmsg">
             <template slot="title">
               <span>求助管理</span>
             </template>
             <el-menu-item index="/admin/helpmsg/add">发布求助</el-menu-item>
             <el-menu-item index="/admin/helpmsg/list">求助列表</el-menu-item>
           </el-submenu>
+
+
+          <!-- 管理员专属组件 -->
+          <el-submenu v-if="admin" index="/admin/helpmsg">
+            <template slot="title">
+              <span>求助管理</span>
+            </template>
+            <el-menu-item index="/admin/helpmsg/add">发布求助</el-menu-item>
+            <el-menu-item index="/admin/helpmsg/admin/list">求助列表</el-menu-item>
+          </el-submenu>
+
+
           <el-menu-item index="/admin/comment">
             <template slot="title">
               <span>留言管理</span>
             </template>
           </el-menu-item>
-          <el-menu-item index="/admin/fans">
-            <template slot="title">
-              <span>关注管理</span>
-            </template>
-          </el-menu-item>
+        
         </el-menu>
       </el-aside>
       <el-main>
+     
         <router-view> </router-view>
       </el-main>
     </el-container>
@@ -65,12 +88,12 @@
 </template>
 
 <script>
-
-
 export default {
   data() {
     return {
-      admin:false,
+
+      
+      admin: false,
       username: window.localStorage.getItem("username"),
       avatar_url: window.localStorage.getItem("avatar"),
     };
@@ -85,6 +108,11 @@ export default {
     this.avatar_url = window.localStorage.getItem("avatar");
   },
   methods: {
+    toHome() {
+      this.$router.push("/web");
+    },
+
+
     isexit() {
       this.$confirm("确定退出吗？", "提示", {
         confirmButtonText: "确定",
@@ -109,11 +137,10 @@ export default {
         });
     },
   },
-  }
- 
+};
 </script>
 
-<style>
+<style   lang="scss" scoped>
 .el-container {
   height: 100%;
 }
@@ -140,7 +167,17 @@ export default {
   align-items: center;
 }
 .el-header div span {
-   color: #ffffff;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  width: 60px;
+  height: 60px;
+  font-size: 15px;
+  margin-right: 15px;
+  margin-left: 15px;
+}
+.el-header div a {
+  color: #ffffff;
   display: flex;
   align-items: center;
   width: 60px;

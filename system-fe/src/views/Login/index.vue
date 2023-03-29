@@ -20,6 +20,7 @@
         <el-form-item prop="password">
           <el-input
             v-model="loginForm.password"
+            show-password
             prefix-icon="el-icon-unlock"
             type="password"
           ></el-input>
@@ -49,7 +50,7 @@ export default {
         username: [
           { required: true, message: "请输入登录名称", trigger: "blur" },
           {
-            min: 1,
+            min: 5,
             max: 10,
             message: "长度在 5 到 10 个字符",
             trigger: "blur",
@@ -59,7 +60,7 @@ export default {
         password: [
           { required: true, message: "请输入登录密码", trigger: "blur" },
           {
-            min: 1,
+            min: 6,
             max: 15,
             message: "长度在 6到 15 个字符",
             trigger: "blur",
@@ -75,6 +76,7 @@ export default {
       this.$refs.loginFormRef.resetFields();
     },
     async login() {
+      console.log(this.$refs.loginFormRef.validate);
       this.$refs.loginFormRef.validate(async (valid) => {
         if (!valid) return;
         // console.log(await this.$http({
@@ -123,7 +125,7 @@ export default {
         // console.log(res.data._id);
 
         // 2. 通过编程式导航跳转到后台主页，路由地址是 /home
-        this.$router.push("/home");
+        this.$router.push("/admin/users/personal");
       });
     },
   },

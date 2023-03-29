@@ -121,6 +121,34 @@ const findByAuthor = async ctx => {
 }
 
 
+//删除评论
+const del = async ctx => {
+    let { _id } = ctx.request.body
+
+    await Comment.deleteOne({ _id: _id }).then(rel => {
+        if (rel) {
+            ctx.body = {
+                code: 200,
+                msg: '删除成功',
+                rel
+
+            }
+        } else {
+            ctx.body = {
+                code: 300,
+                msg: '删除失败'
+            }
+        }
+    }).catch(err => {
+        ctx.body = {
+            code: 500,
+            msg: '删除时出现异常',
+            err
+        }
+    })
+
+}
+
 
 
 
@@ -128,5 +156,5 @@ const findByAuthor = async ctx => {
 
 module.exports = {
     add, findById,
-    findByAuthor
+    findByAuthor, del
 }

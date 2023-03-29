@@ -1,4 +1,4 @@
-let { add, findById, findByAuthor } = require('../controller/comment')
+let { add, findById, findByAuthor ,del} = require('../controller/comment')
 const router = require('koa-router')()
 router.prefix('/comment')
 
@@ -10,5 +10,9 @@ router.get('/web/find', findById)
 
 //后台根据author（作者）来进行查询
 router.get('/admin/find', findByAuthor)
+
+
+//删除评论
+router.post('/del', del)
 
 module.exports = router

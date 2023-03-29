@@ -28,7 +28,7 @@
       <el-table-column label="操作">
         <template slot-scope="scope">
           <!-- <el-button type="text" size="small">查看</el-button> -->
-          <el-button @click="update(scope.row)" type="text" size="small"
+          <el-button @click="reply(scope.row)" type="text" size="small"
             >回复
           </el-button>
         </template>
@@ -80,11 +80,12 @@ export default {
         this.page = res.data.page; 
       });
     },
-    update(row) {
+    reply(row) {
       this.$router.push({
-        path: "/admin/helpmsg/updateHelpmsg",
+        path: "/web/reply",
         query: {
           id: row.id,
+          
         },
       });
     },

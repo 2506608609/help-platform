@@ -10,6 +10,7 @@ let schema = mongoose.Schema({
 	helpmsgId: Number,
 	content: String,
 	createTime: String,
+	avatar: String,
 
 
 

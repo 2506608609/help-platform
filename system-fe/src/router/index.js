@@ -50,6 +50,15 @@ const routes = [
 
         }
       },
+      {
+        path: '/web/reply',
+        name: 'Webreply',
+        component: () => import('../views/web/reply'),
+        meta: {
+          title: '回复'
+
+        }
+      },
 
     ]
 

@@ -50,15 +50,10 @@ const login = async ctx => {
 //注册接口
 
 const reg = async ctx => {
-    let { username, password } = ctx.request.body
+    let { username, password,createTime } = ctx.request.body
     let isdouble = false
-
-
     await Users.findOne({ username, password }).then(rel => {
-
-
         if (rel) isdouble = true
-
     })
     if (isdouble) {
         ctx.body = {
@@ -67,34 +62,24 @@ const reg = async ctx => {
         }
         return
     }
-
-
-    await Users.create({ username, password }).then(rel => {
-
+    await Users.create({ username, password ,createTime}).then(rel => {
         if (rel) {
             ctx.body = {
-
+                rel,
                 code: 200,
                 msg: '注册成功',
-
             }
         } else {
             ctx.body = {
-
                 code: 300,
                 msg: '注册失败',
-
             }
         }
-
-
     }).catch(err => {
         ctx.body = {
-
             code: 500,
             msg: '注册出现异常',
             err
-
         }
     })
 }
@@ -207,21 +192,35 @@ const updatePersonal = async ctx => {
         })
 }
 
-//查询所有用户
-const findAll = async ctx => {
-    await Users.find().then(rel => {
+//查询所有用户(分页)
+const findAll = async (ctx) => {
+    try {
+        const page = parseInt(ctx.query.page) || 1
+        const pageSize = 5
+
+        const count = await Users.countDocuments()
+        const totalPage = Math.ceil(count / pageSize)
+
+        const start = (page - 1) * pageSize
+
+        const users = await Users.find().skip(start).limit(pageSize)
+
         ctx.body = {
             code: 200,
             msg: '查询成功',
-            rel
+            users,
+            totalPage,
+            page,
+            pageSize,
+            count,
         }
-    }).catch(err => {
+    } catch (err) {
         ctx.body = {
             code: 500,
-            msg: '查询异常',
-            err
+            msg: '查询出现了异常捏',
+            err,
         }
-    })
+    }
 }
 
 //查询单个用户接口
@@ -242,6 +241,39 @@ const findOne = async ctx => {
         }
     })
 }
+
+
+//删除用户接口
+const del = async ctx => {
+    let { _id } = ctx.request.body
+    await Users.deleteOne({ _id }).then(rel => {
+        if (rel.deletedCount) {
+            ctx.body = {
+                code: 200,
+                msg: '删除成功'
+            }
+        } else {
+            ctx.body = {
+                code: 300,
+                msg: '删除失败'
+            }
+        }
+    }).catch(err => {
+        ctx.body = {
+            code: 500,
+            msg: '删除异常',
+            err
+        }
+    }
+    )
+
+
+}
+
+
+
+
+
 module.exports = {
     login,
     reg,
@@ -250,6 +282,7 @@ module.exports = {
     updatePersonal,
     findAll,
     findOne,
+    del
 
 
 }

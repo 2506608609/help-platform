@@ -1,6 +1,7 @@
 let {
     addHnotice,
     findHnotice,
+    findOneHnotice,
     updateHnotice,
     deleteHnotice
 } = require('../controller/hnotice.js')
@@ -16,6 +17,10 @@ router.post('/addHnotice', addHnotice)
 //查询所有公告
 
 router.get('/findHnotice', findHnotice)
+
+
+//查询一个公告
+router.post('/findOneHnotice', findOneHnotice)
 
 //修改公告
 router.post('/updateHnotice', updateHnotice)

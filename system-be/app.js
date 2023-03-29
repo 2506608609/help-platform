@@ -19,7 +19,7 @@ const user = require('./router/users')
 const upload = require('./router/upload')
 const helpmsg = require('./router/helpmsg')
 const hnotice = require('./router/hnotice')
-
+const comment = require('./router/comment')
 
 
 
@@ -49,7 +49,7 @@ app.use(user.routes(), user.allowedMethods)
 app.use(upload.routes(), upload.allowedMethods)
 app.use(helpmsg.routes(), helpmsg.allowedMethods)
 app.use(hnotice.routes(), hnotice.allowedMethods)
-
+app.use(comment.routes(), comment.allowedMethods)
 
 
 app.listen(3000)

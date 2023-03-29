@@ -6,6 +6,7 @@ const {
     updatePersonal,
     findAll,
     findOne,
+    del
 
 } = require('../controller/users')
 const router = require('koa-router')()
@@ -43,7 +44,8 @@ router.get('/find/all', findAll)
 //查询单个用户
 router.get('/find/one', findOne)
 
-
+//删除用户
+router.post('/del', del)
 
 
 

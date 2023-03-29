@@ -30,9 +30,37 @@ const addHnotice = async ctx => {
 }
 
 
+//查询所有公告返回content内容
+
+const findallHnotice = async ctx => {
+    await Hnotice.find().then(rel => {
+        if (rel) {
+            ctx.body = {
+                code: 200,
+                msg: '查询成功',
+                rel,
+               
+            }
+        } else {
+            ctx.body = {
+                code: 300,
+                msg: '查询失败'
+            }
+        }
 
 
-//查询公告
+    }).catch(err => {
+        ctx.body = {
+            code: 500,
+            msg: '查询出现了异常捏',
+            err
+        }
+    })
+}
+
+
+
+//查询所有公告分页查询
 const findHnotice = async (ctx) => {
     try {
         const page = parseInt(ctx.query.page) || 1
@@ -40,11 +68,11 @@ const findHnotice = async (ctx) => {
 
         const count = await Hnotice.countDocuments()
         const totalPage = Math.ceil(count / pageSize)
-
+        
         const start = (page - 1) * pageSize
-
+        const content = ctx.query.content
         const hnotice = await Hnotice.find().skip(start).limit(pageSize)
-
+        
         ctx.body = {
             code: 200,
             msg: '查询成功',
@@ -53,7 +81,11 @@ const findHnotice = async (ctx) => {
             page,
             pageSize,
             count,
+            content
             
+            
+            
+
         }
     } catch (err) {
         ctx.body = {
@@ -64,6 +96,33 @@ const findHnotice = async (ctx) => {
     }
 }
 
+
+//查询一个公告
+const findOneHnotice = async ctx => {
+    let { _id } = ctx.request.body
+
+
+    await Hnotice.findOne({ _id }).then(rel => {
+        if (rel) {
+            ctx.body = {
+                code: 200,
+                msg: '查询成功',
+                rel
+            }
+        } else {
+            ctx.body = {
+                code: 300,
+                msg: '查询失败'
+            }
+        }
+    }).catch(err => {
+        ctx.body = {
+            code: 500,
+            msg: '查询出现了异常捏',
+            err
+        }
+    })
+}
 
 //修改公告
 const updateHnotice = async ctx => {
@@ -123,9 +182,11 @@ const deleteHnotice = async ctx => {
 }
 
 
-module.exports = {  
+module.exports = {
     addHnotice,
     findHnotice,
+    findOneHnotice,
     updateHnotice,
-    deleteHnotice
+    deleteHnotice,
+
 }

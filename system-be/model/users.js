@@ -7,7 +7,7 @@ let schema = new mongoose.Schema({
     },
     password: {
         type: String,
-        select: false
+        select: true
     },
     personal_intro: String,
     avatar: {
@@ -30,7 +30,7 @@ let schema = new mongoose.Schema({
         type: String,
         defaule: ''
     },
-    
+    createTime: String,
     
 })
 

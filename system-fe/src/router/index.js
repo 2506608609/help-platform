@@ -190,11 +190,27 @@ const routes = [
 
     ]
 
-  }, {
+  },
+  
+  
+  
+  {
     path: '/login',
     name: 'Login',
     component: () => import('@/views/Login')
   },
+  {
+    path: '/reg',
+    name: 'reg',
+    component: () => import('@/views/Login/reg.vue')
+  },
+
+
+
+
+
+
+
   //重定位到登录页
   { path: '/', redirect: '/login' },
 ]

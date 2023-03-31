@@ -250,18 +250,18 @@ const del = async ctx => {
         if (rel.deletedCount) {
             ctx.body = {
                 code: 200,
-                msg: '删除成功'
+                msg: '注销成功'
             }
         } else {
             ctx.body = {
                 code: 300,
-                msg: '删除失败'
+                msg: '注销失败'
             }
         }
     }).catch(err => {
         ctx.body = {
             code: 500,
-            msg: '删除异常',
+            msg: '注销异常',
             err
         }
     }

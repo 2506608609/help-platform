@@ -103,6 +103,7 @@ export default {
           offset: 300,
           message: res.data.msg,
           type: res.data.code === 200 ? "success" : "error",
+          
         });
       });
 

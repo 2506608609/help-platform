@@ -6,7 +6,7 @@
         <span @click="toweb">首页</span>
         <span @click="tonotice">公告</span>
         <span @click="tohelpmsg">求助</span>
-        <!-- <span @click="toshare">分享</span> -->
+        <span @click="toshare">聊天室</span>
       </div>
       <div class="header-right">
         <el-link
@@ -64,7 +64,7 @@ export default {
       this.$router.push("/web/helpmsg");
     },
     toshare() {
-      this.$router.push("/web/share");
+      this.$router.push("/web/talk");
     },
 
     isexit() {

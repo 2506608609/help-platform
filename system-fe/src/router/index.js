@@ -50,12 +50,23 @@ const routes = [
 
         }
       },
+
+
       {
         path: '/web/reply',
         name: 'Webreply',
         component: () => import('../views/web/reply'),
         meta: {
           title: '回复'
+
+        }
+      },
+      {
+        path: '/web/talk',
+        name: 'Webtalk',
+        component: () => import('../views/Talk/index.vue'),
+        meta: {
+          title: '聊天室'
 
         }
       },

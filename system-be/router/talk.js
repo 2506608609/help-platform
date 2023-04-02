@@ -1,5 +1,5 @@
 let { add, find } = require('../controller/talk')
-const router = require('./comment')
+const router = require('koa-router')()
 
 
 router.prefix('/talk')

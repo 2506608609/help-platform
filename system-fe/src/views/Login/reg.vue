@@ -1,7 +1,7 @@
 <template>
   <div class="reg_container">
     <div class="reg_box">
-      <div class="title">后台管理系统登陆界面</div>
+      <div class="title">校园万事屋注册界面</div>
       <el-form
         ref="loginFormRef"
         :model="Form"

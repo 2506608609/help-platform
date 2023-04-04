@@ -1,35 +1,32 @@
 <template>
   <div>
-    <el-table :data="helpmsgs" style="width: 100%" class="table"
-      ><el-table-column label="发布人"  >
+    <el-table :data="job" style="width: 100%" class="table"
+      ><el-table-column label="发布人">
         <template slot-scope="scope">
           <el-image
-            style="width: 60px; height: 60px; border-radius: 100%;"
+            style="width: 60px; height: 60px; border-radius: 100%"
             :src="scope.row.avatar"
-           
           ></el-image>
-           <span style="font-size: large;">{{scope.row.author}}</span>
+          <span style="font-size: large">{{ scope.row.author }}</span>
         </template>
       </el-table-column>
       <el-table-column label="标题" prop="title"></el-table-column>
 
-<el-table-column label="内容" prop="content">
+      <el-table-column label="内容" prop="content">
         <template slot-scope="scope">
           <div v-html="scope.row.content"></div>
         </template>
       </el-table-column>
       <el-table-column label="类型" prop="classify"></el-table-column>
       <el-table-column label="发布时间" prop="createTime"></el-table-column>
-     
-      
 
       <!-- <el-table-column label="状态" prop=""></el-table-column> -->
 
       <el-table-column label="操作">
         <template slot-scope="scope">
           <!-- <el-button type="text" size="small">查看</el-button> -->
-          <el-button @click="reply(scope.row)" type="text" size="small"
-            >回复
+          <el-button @click="detail(scope.row)" type="text" size="small"
+            >详情
           </el-button>
         </template>
       </el-table-column>
@@ -53,7 +50,7 @@
 export default {
   data() {
     return {
-      helpmsgs: [],
+      job: [],
       page: 1,
       pageSize: 0,
       count: 0,
@@ -61,12 +58,11 @@ export default {
   },
   created() {
     this.getData();
-  
   },
   methods: {
     getData() {
       this.$http({
-        path: "/helpmsg/findAllHelpmsg/admin",
+        path: "/job/findweb",
         method: "get",
         params: {
           page: this.page,
@@ -74,22 +70,20 @@ export default {
         },
       }).then((res) => {
         console.log(res.data);
-        this.helpmsgs = res.data.helpmsgs;
+        this.job = res.data.job;
         this.pageSize = res.data.pageSize;
         this.count = res.data.count;
-        this.page = res.data.page; 
+        this.page = res.data.page;
       });
     },
-    reply(row) {
+    detail(row) {
       this.$router.push({
-        path: "/web/reply",
+        path: "/web/detail",
         query: {
-          id: row.id,
-          
+          _id: row._id,
         },
       });
     },
-
 
     // 分页组件
     //实现下一页可以渲染下一页的数据

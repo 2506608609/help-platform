@@ -2,11 +2,10 @@
 <template>
   <el-container>
     <el-header>
-      <div class="sys-title" v-if="admin">后台管理系统</div>
+      <div class="sys-title" v-if="admin">管理员系统</div>
       <div class="sys-title" v-if="!admin">个人中心</div>
       <div class="header-right">
-        <el-link :underline="false" style="margin-right: 20px"
-        @click="toHome"
+        <el-link :underline="false" style="margin-right: 20px" @click="toHome"
           >网站首页</el-link
         >
         <el-avatar size="medium" :src="avatar_url"></el-avatar>
@@ -23,15 +22,15 @@
           background-color="black"
           text-color="#fff"
         >
-
           <el-submenu v-if="admin" index="/admin/usercontrol">
             <template slot="title">
               <span>用户管理</span>
             </template>
             <el-menu-item index="/admin/usercontrol/add">用户添加</el-menu-item>
-            <el-menu-item index="/admin/usercontrol/list">用户列表</el-menu-item>
+            <el-menu-item index="/admin/usercontrol/list"
+              >用户列表</el-menu-item
+            >
           </el-submenu>
-
 
           <el-submenu index="/admin/users">
             <template slot="title">
@@ -40,7 +39,6 @@
             <el-menu-item index="/admin/users/personal">个人资料</el-menu-item>
             <el-menu-item index="/admin/users/password">修改密码</el-menu-item>
           </el-submenu>
-
 
           <!-- 管理员专属组件 -->
           <el-submenu v-if="admin" index="/admin/notice">
@@ -51,7 +49,6 @@
             <el-menu-item index="/admin/notice/del">整整公告</el-menu-item>
           </el-submenu>
 
-
           <el-submenu v-if="!admin" index="/admin/helpmsg">
             <template slot="title">
               <span>求助管理</span>
@@ -60,27 +57,58 @@
             <el-menu-item index="/admin/helpmsg/list">求助列表</el-menu-item>
           </el-submenu>
 
-
           <!-- 管理员专属组件 -->
           <el-submenu v-if="admin" index="/admin/helpmsg">
             <template slot="title">
               <span>求助管理</span>
             </template>
             <el-menu-item index="/admin/helpmsg/add">发布求助</el-menu-item>
-            <el-menu-item index="/admin/helpmsg/admin/list">求助列表</el-menu-item>
+            <el-menu-item index="/admin/helpmsg/admin/list"
+              >求助列表</el-menu-item
+            >
           </el-submenu>
 
+          <el-submenu v-if="!admin" index="/admin/idle">
+            <template slot="title">
+              <span>闲置管理</span>
+            </template>
+            <el-menu-item index="/admin/idle/add">发布闲置</el-menu-item>
+            <el-menu-item index="/admin/idle/list">闲置列表</el-menu-item>
+          </el-submenu>
+          <el-submenu v-if="admin" index="/admin/idle">
+            <template slot="title">
+              <span>闲置管理</span>
+            </template>
+            <el-menu-item index="/admin/idle/add">发布闲置</el-menu-item>
+            <el-menu-item index="/admin/idle/list/admin">闲置列表</el-menu-item>
+          </el-submenu>
+
+          <el-submenu v-if="!hr" index="/admin/job">
+            <template slot="title">
+              <span>就业相关</span>
+            </template>
+            <el-menu-item index="/admin/job/add">发布求职</el-menu-item>
+            <el-menu-item v-if="!admin" index="/admin/job/list">求职列表</el-menu-item>
+            <el-menu-item v-if="admin" index="/admin/job/list/hr">求职列表</el-menu-item>
+          </el-submenu>
+
+          <el-submenu v-if="hr" index="/admin/hrjob">
+            <template slot="title">
+              <span>招聘相关</span>
+            </template>
+            <el-menu-item index="/admin/job/add">发布招聘</el-menu-item>
+            <el-menu-item v-if="!admin" index="/admin/job/list">招聘列表</el-menu-item>
+            <el-menu-item v-if="admin" index="/admin/job/list/hr">招聘列表</el-menu-item>
+          </el-submenu>
 
           <el-menu-item index="/admin/comment">
             <template slot="title">
               <span>留言管理</span>
             </template>
           </el-menu-item>
-        
         </el-menu>
       </el-aside>
       <el-main>
-     
         <router-view> </router-view>
       </el-main>
     </el-container>
@@ -91,8 +119,6 @@
 export default {
   data() {
     return {
-
-      
       admin: false,
       username: window.localStorage.getItem("username"),
       avatar_url: window.localStorage.getItem("avatar"),
@@ -101,7 +127,10 @@ export default {
   created() {
     console.log("created 执行了");
     this.admin = this.$store.state.user.state.admin;
-    console.log(this.admin);
+    this.hr = this.$store.state.user.state.hr;
+    // console.log(this.admin);
+    console.log(this.$store.state.user.state);
+    console.log(this.hr);
   },
   beforeDestroy() {
     // console.log("beforeDestory 执行了");
@@ -111,7 +140,6 @@ export default {
     toHome() {
       this.$router.push("/web/home");
     },
-
 
     isexit() {
       this.$confirm("确定退出吗？", "提示", {

@@ -5,6 +5,10 @@ let schema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
+    hr: {
+        type: Boolean,
+        default: false
+    },
     password: {
         type: String,
         select: true
@@ -31,7 +35,11 @@ let schema = new mongoose.Schema({
         defaule: ''
     },
     createTime: String,
-    
+    address: {
+        type: String,
+        defaule: ''
+    },
+
 })
 
 

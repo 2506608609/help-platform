@@ -39,7 +39,7 @@ const routes = [
         meta: {
           title: '公告'
 
-        } 
+        }
       },
       {
         path: '/web/helpmsg',
@@ -47,6 +47,24 @@ const routes = [
         component: () => import('../views/web/helpmsg.vue'),
         meta: {
           title: '求助'
+
+        }
+      },
+      {
+        path: '/web/job',
+        name: 'Webjob',
+        component: () => import('../views/web/job.vue'),
+        meta: {
+          title: 'job相关'
+
+        }
+      },
+      {
+        path: '/web/idle',
+        name: 'Webidle',
+        component: () => import('../views/web/idle.vue'),
+        meta: {
+          title: '闲置相关'
 
         }
       },
@@ -62,6 +80,26 @@ const routes = [
         }
       },
       {
+        path: '/web/detail',
+        name: 'Webdetail',
+        component: () => import('../views/web/detail'),
+        meta: {
+          title: 'job详情'
+
+        }
+      },
+      {
+        path: '/web/diledetail',
+        name: 'Webdetail',
+        component: () => import('../views/web/idledel.vue'),
+        meta: {
+          title: '闲置详情'
+
+        }
+      },
+
+
+      {
         path: '/web/talk',
         name: 'Webtalk',
         component: () => import('../views/Talk/index.vue'),
@@ -74,7 +112,7 @@ const routes = [
     ]
 
 
-    
+
   },
 
   {
@@ -132,8 +170,8 @@ const routes = [
           title: "修改密码",
         },
       },
-      
-      
+
+
       {
         path: '/admin/notice/add',
         name: 'Hnoticemsgadd',
@@ -190,6 +228,10 @@ const routes = [
           title: '修改求助'
         }
       },
+
+
+
+
       {
         path: '/admin/comment',
         name: 'comment',
@@ -199,12 +241,89 @@ const routes = [
         }
       },
 
+
+      {
+        path: '/admin/idle/add',
+        name: 'idleadd',
+        component: () => import('@/views/Idle/add'),
+        meta: {
+          title: '发布闲置'
+        }
+      },
+      {
+        path: '/admin/idle/list',
+        name: 'idlelist',
+        component: () => import('@/views/Idle/index.vue'),
+        meta: {
+          title: '闲置列表'
+        }
+      },
+      {
+        path: '/admin/idle/list/admin',
+        name: 'adminidlelist',
+        component: () => import('@/views/Idle/adminindex.vue'),
+        meta: {
+          title: '闲置列表'
+        }
+      },
+
+
+
+      {
+        path: '/admin/idle/update',
+        name: 'updateidle',
+        component: () => import('@/views/Idle/update.vue'),
+        meta: {
+          title: '修改闲置'
+        }
+      },
+
+
+
+
+      {
+        path: '/admin/job/add',
+        name: 'idleadd',
+        component: () => import('@/views/Job/add'),
+        meta: {
+          title: '发布招聘'
+        }
+      },
+      {
+        path: '/admin/job/list',
+        name: 'idlelist',
+        component: () => import('@/views/Job/index.vue'),
+        meta: {
+          title: 'job列表'
+        }
+      },
+      {
+        path: '/admin/job/list/hr',
+        name: 'adminjoblist',
+        component: () => import('@/views/Job/adminindex.vue'),
+        meta: {
+          title: 'job列表'
+        }
+      },
+
+
+
+      {
+        path: '/admin/job/update',
+        name: 'updateidle',
+        component: () => import('@/views/Job/update.vue'),
+        meta: {
+          title: '修改job'
+        }
+      },
+
+
     ]
 
   },
-  
-  
-  
+
+
+
   {
     path: '/login',
     name: 'Login',

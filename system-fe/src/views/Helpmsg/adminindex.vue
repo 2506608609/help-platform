@@ -123,13 +123,7 @@ export default {
 
 <style lang="scss" scoped>
 
-// ::v-deep.el-table thead {
-//   color: #FC5531;
-//   background-color: rgba(255, 255, 255, 0.1);
-// }
-// ::v-deep .el-table tr{
-//     background-color:black 
-// }
+
 
 
 

@@ -21,6 +21,9 @@ const helpmsg = require('./router/helpmsg')
 const hnotice = require('./router/hnotice')
 const comment = require('./router/comment')
 const talk = require('./router/talk')
+const idle = require('./router/idle')
+const job = require('./router/job')
+
 
 
 
@@ -39,7 +42,7 @@ app.use(views(__dirname + '/views', {
 app.use(koajwt({
     secret: 'ok'
 }).unless({
-    path: [/^\/users\/login/, /^\/users\/reg/, ]//不同通关jwt认证
+    path: [/^\/users\/login/, /^\/users\/reg/, ]//不用通jwt认证
 
 }))
 
@@ -52,6 +55,8 @@ app.use(helpmsg.routes(), helpmsg.allowedMethods)
 app.use(hnotice.routes(), hnotice.allowedMethods)
 app.use(comment.routes(), comment.allowedMethods)
 app.use(talk.routes(), talk.allowedMethods)
+app.use(idle.routes(), idle.allowedMethods)
+app.use(job.routes(), job.allowedMethods)
 
 
 app.listen(3000)

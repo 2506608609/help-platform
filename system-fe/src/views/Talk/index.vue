@@ -56,13 +56,13 @@ export default {
         path: "/talk/find",
         method: "get",
       }).then((res) => {
-        console.log(res);
+        // console.log(res);
         this.talk = res.data.rel;
       });
     },
     settime() {
       this.timer = setInterval(() => {
-        console.log("开始了");
+        // console.log("开始了");
         this.getData();
       }, 1000);
     },

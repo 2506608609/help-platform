@@ -1,11 +1,13 @@
 <template>
   <el-container>
     <el-header>
-      <div class="sys-title" v-if="admin">校园万事屋</div>
+      <div class="sys-title">校园万事屋</div>
       <div class="sys-menu">
         <span @click="toweb">首页</span>
         <span @click="tonotice">公告</span>
         <span @click="tohelpmsg">求助</span>
+        <span @click="toidle">闲置</span>
+        <span @click="tojob">工作</span>
         <span @click="toshare">聊天室</span>
       </div>
       <div class="header-right">
@@ -30,9 +32,7 @@
         <el-link :underline="false" @click="isexit">退出</el-link>
       </div>
     </el-header>
-    <el-main>
-      <router-view> </router-view> </el-main
-    ><el-footer></el-footer>
+    <el-main> <router-view> </router-view> </el-main><el-footer></el-footer>
   </el-container>
 </template>
 
@@ -65,6 +65,12 @@ export default {
     },
     toshare() {
       this.$router.push("/web/talk");
+    },
+    toidle() {
+      this.$router.push("/web/idle");
+    },
+    tojob() {
+      this.$router.push("/web/job");
     },
 
     isexit() {

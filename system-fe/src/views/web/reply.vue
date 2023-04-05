@@ -81,7 +81,7 @@ export default {
     submit() {
       //获取富文本编辑器的内容
       let content = this.content1
-      // console.log(content)
+      console.log(this.form.username)
       let date = new Date();
       this.$http({
         path: "/comment/add",
@@ -92,7 +92,7 @@ export default {
           createTime:`${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`,
           avatar: this.form.avatar,
           author: this.form.author,
-          username: this.form.username,
+          username: window.localStorage.getItem("username"),
           helpmsgTitle: this.form.title,
           
           content,

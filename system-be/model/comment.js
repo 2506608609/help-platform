@@ -6,7 +6,9 @@ let schema = mongoose.Schema({
 	//
 	username: String,
 	author: String,
-	helpmsgTitle: String,
+	helpmsgTitle:String,
+
+	title:String,
 	helpmsgId: Number,
 	content: String,
 	createTime: String,

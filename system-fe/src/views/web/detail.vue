@@ -15,8 +15,15 @@
         <span>发布人:{{ form.author }}</span>
         <span>发布时间:{{ form.createTime }}</span>
 
-        <el-button type="primary" @click="111">咨询一下</el-button>
+        <el-button type="primary" @click="reply">咨询一下</el-button>
       </div>
+    </div>
+    <div class="rep" v-show="rel">
+      <el-col :span="18"
+        ><el-input v-model="rep" type="text" placeholder="回复"></el-input>
+      </el-col>
+
+      <el-button type="success" @click="save">发送</el-button>
     </div>
   </div>
 </template>
@@ -26,7 +33,39 @@ export default {
   data() {
     return {
       form: {},
+      rel: false,
+      rep: "",
     };
+  },
+  methods: {
+    reply() {
+      this.rel = true;
+      console.log(this.form);
+    },
+    save() {
+      this.rel = false;
+      let date = new Date();
+
+      this.$http({
+        path: "/comment/add",
+        method: "post",
+        params: {
+          username: window.localStorage.getItem("username"),
+          author: this.form.author,
+          avatar: this.form.avatar,
+          content: this.rep,
+          title: this.form.title,
+          createTime: `${date.getFullYear()}-${
+            date.getMonth() + 1
+          }-${date.getDate()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`,
+        },
+      }).then((res) => {
+        this.$message({
+          message: res.data.msg,
+          type: res.data.code === 200 ? "success" : "error",
+        });
+      });
+    },
   },
   created() {
     let _id = this.$route.query._id;
@@ -61,6 +100,8 @@ export default {
   height: 100%;
   display: flex;
   margin: auto;
+  align-content: center;
+  justify-content: center;
 }
 .box > .middle {
   width: 900px;
@@ -87,5 +128,17 @@ export default {
   flex-direction: column;
   justify-content: space-around;
   //   align-items: center;
+}
+.rep {
+  width: 900px;
+  height: 100px;
+  // background-color: rgba(255, 255, 255, 0.1);
+  position: absolute;
+  bottom: 60px;
+  text-align: center;
+}
+
+::v-deep .el-input__inner {
+  background-color: rgba(255, 255, 255, 0.1);
 }
 </style>

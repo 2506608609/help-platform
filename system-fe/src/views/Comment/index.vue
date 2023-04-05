@@ -11,7 +11,10 @@
               ></el-image>
               <span style="text-align: center">{{ scope.row.username }}</span>
               <span style="font-size: large"
-                >回复了标题为{{ scope.row.helpmsgTitle }}的帖子:
+                >回复了标题为<span style="color: pink">{{
+                  scope.row.title
+                }}</span
+                >的帖子:
               </span>
 
               <span style="font-size: large; color: pink">{{
@@ -25,6 +28,9 @@
 
       <el-table-column>
         <template slot-scope="scope">
+          <el-button @click="reply(scope.row)" type="text" size="small"
+            >回复
+          </el-button>
           <el-button @click="del(scope.row)" type="text" size="small"
             >删除
           </el-button>
@@ -41,6 +47,14 @@
       :current-page="page"
       @current-change="changePage"
     ></el-pagination>
+
+    <div class="box" v-show="rel">
+      <el-col :span="18"
+        ><el-input v-model="rep" type="text" placeholder="回复"></el-input>
+      </el-col>
+
+      <el-button type="success" @click="save">发送</el-button>
+    </div>
   </div>
 </template>
 
@@ -52,14 +66,16 @@ export default {
       page: 1,
       pageSize: 0,
       count: 0,
+      rel: false,
+      rep: "",
+      form: [],
     };
   },
   created() {
     this.getData();
   },
- 
+
   methods: {
-    
     getData() {
       this.$http({
         path: "/comment/admin/find",
@@ -77,6 +93,37 @@ export default {
       });
     },
 
+    reply(row) {
+      this.rel = true;
+      // console.log(row);
+      return (this.form = row);
+    },
+    save() {
+      this.rel = false;
+      let date = new Date();
+      console.log(this.form);
+      this.$http({
+        path: "/comment/add",
+        method: "post",
+        params: {
+          username: window.localStorage.getItem("username"),
+          author: this.form.username,
+          content: this.rep,
+          avatar: window.localStorage.getItem("avatar"),
+          title: this.form.title,
+          createTime: `${date.getFullYear()}-${
+            date.getMonth() + 1
+          }-${date.getDate()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`,
+          helpmsgTitle: this.form.helpmsgTitle,
+        },
+      }).then((res) => {
+        this.$message({
+          message: res.data.msg,
+          type: res.data.code === 200 ? "success" : "error",
+        });
+      });
+    },
+
     del(row) {
       //此处的row即为所有的信息（）
       console.log(row._id);
@@ -89,18 +136,17 @@ export default {
           path: "/comment/del",
           method: "post",
           params: {
-            _id:row._id
+            _id: row._id,
           },
         })
           .then((res) => {
-           
             this.$message({
               //提示栏中信息提示：
               message: res.data.msg,
 
               type: res.data.code === 200 ? "success" : "error",
             });
-             if (res.data.code === 200) {
+            if (res.data.code === 200) {
               this.getData();
             }
           })
@@ -117,6 +163,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+::v-deep .el-input__inner {
+  background-color: rgba(255, 255, 255, 0.1);
+}
 .tableBox {
   width: 470px;
 }

@@ -51,9 +51,9 @@ export default {
         username: [
           { required: true, message: "请输入登录名称", trigger: "blur" },
           {
-            min: 5,
+            min: 3,
             max: 10,
-            message: "长度在 5 到 10 个字符",
+            message: "长度在 3 到 10 个字符",
             trigger: "blur",
           },
         ],

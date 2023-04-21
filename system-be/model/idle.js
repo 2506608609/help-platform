@@ -9,6 +9,7 @@ let idleSchema = new Schema({
     content: String,  //内容
     classify: String,  //分类/闲置,求购
     author: String, //发布者
+    details: String,  //详情
     avatar: {
         type: String,
         default: ''

@@ -12,6 +12,7 @@
         <h1 style="color: black">详情</h1>
         <span>标题: {{ form.title }}</span>
         <span>价格: {{ form.price }}</span>
+        <span>详细描述: {{ form.details }}</span>
         <span>状态: {{ form.state }}</span>
         <span>发布人: {{ form.author }}</span>
 

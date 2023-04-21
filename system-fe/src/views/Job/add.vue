@@ -7,6 +7,10 @@
       <el-form-item label="内容">
         <div id="editor"></div>
       </el-form-item>
+
+       <el-form-item label="描述">
+        <el-input v-model="form.details" placeholder="详细描述" />
+      </el-form-item>
       <el-form-item label="分类">
         ><el-col :span="8"
           ><el-input v-model="form.classify" placeholder="请输入类型">
@@ -28,6 +32,7 @@ export default {
   data() {
     return {
       form: {
+        details: "",
         title: "",
         content: "",
         classify: "",
@@ -77,6 +82,7 @@ export default {
           classify: this.form.classify,
           author: this.form.author,
           avatar: this.form.avatar,
+          details: this.form.details,
         },
       }).then((res) => {
         this.$message({

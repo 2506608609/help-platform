@@ -11,6 +11,10 @@
       <el-form-item label="内容">
         <div id="editor"></div>
       </el-form-item>
+
+       <el-form-item label="描述">
+        <el-input v-model="form.details" placeholder="详细描述" />
+      </el-form-item>
       <el-form-item label="分类">
         ><el-col :span="8"
           ><el-input v-model="form.classify" placeholder="请输入类型">
@@ -30,6 +34,7 @@ export default {
   data() {
     return {
       form: {
+        details: "",
         _id: "",
         title: "",
         classify: "",
@@ -90,6 +95,7 @@ export default {
         path: "/job/update",
         method: "post",
         params: {
+          details: this.form.details,
           _id: this.form._id,
           title: this.form.title,
           // createTime:`${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`,

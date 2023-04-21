@@ -130,7 +130,9 @@ const updateIdle = async ctx => {
         content: idle.content,
         classify: idle.classify,
         price: idle.price,
-        state: idle.state
+        state: idle.state,
+        details: idle.details,
+
 
 
     }).then(rel => {

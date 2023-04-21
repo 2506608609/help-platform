@@ -15,6 +15,10 @@
       <el-form-item label="价格">
         <el-input v-model="form.price" placeholder="请输价格" />
       </el-form-item>
+
+       <el-form-item label="描述">
+        <el-input v-model="form.details" placeholder="详细描述" />
+      </el-form-item>
       <el-form-item label="类型">
         <el-radio v-model="form.classify" label="出售">出售</el-radio>
         <el-radio v-model="form.classify" label="求购">求购</el-radio>
@@ -32,6 +36,7 @@ export default {
   data() {
     return {
       form: {
+        details: "",
         _id: "",
         title: "",
         price: "",
@@ -97,6 +102,7 @@ export default {
           // createTime:`${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`,
           classify: this.form.classify,
           price: this.form.price,
+          details: this.form.details,
           content,
           // author:this.form.author,
         },

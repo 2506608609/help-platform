@@ -14,6 +14,7 @@
 
         <span>发布人:{{ form.author }}</span>
         <span>发布时间:{{ form.createTime }}</span>
+        <span>详细描述:{{ form.details }}</span>
 
         <el-button type="primary" @click="reply">咨询一下</el-button>
       </div>

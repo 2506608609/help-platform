@@ -9,6 +9,7 @@ let jobSchema = new Schema({
     content: String,  //内容
     classify: String,  //分类,招聘,求职
     author: String, //发布者
+    details: String,  //详情
     avatar: {
         type: String,
         default: ''

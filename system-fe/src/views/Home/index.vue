@@ -10,7 +10,9 @@
         >
         <el-avatar size="medium" :src="avatar_url"></el-avatar>
         <span v-show="admin">管理员:</span>
-        <el-link :underline="false">{{ username }}</el-link>
+        <el-link :underline="false" style="white-space: nowrap">{{
+          username
+        }}</el-link>
         <el-link :underline="false" @click="isexit">退出</el-link>
       </div>
     </el-header>
@@ -88,8 +90,12 @@
               <span>就业相关</span>
             </template>
             <el-menu-item index="/admin/job/add">发布求职</el-menu-item>
-            <el-menu-item v-if="!admin" index="/admin/job/list">求职列表</el-menu-item>
-            <el-menu-item v-if="admin" index="/admin/job/list/hr">求职列表</el-menu-item>
+            <el-menu-item v-if="!admin" index="/admin/job/list"
+              >求职列表</el-menu-item
+            >
+            <el-menu-item v-if="admin" index="/admin/job/list/hr"
+              >求职列表</el-menu-item
+            >
           </el-submenu>
 
           <el-submenu v-if="hr" index="/admin/hrjob">
@@ -97,8 +103,12 @@
               <span>招聘相关</span>
             </template>
             <el-menu-item index="/admin/job/add">发布招聘</el-menu-item>
-            <el-menu-item v-if="!admin" index="/admin/job/list">招聘列表</el-menu-item>
-            <el-menu-item v-if="admin" index="/admin/job/list/hr">招聘列表</el-menu-item>
+            <el-menu-item v-if="!admin" index="/admin/job/list"
+              >招聘列表</el-menu-item
+            >
+            <el-menu-item v-if="admin" index="/admin/job/list/hr"
+              >招聘列表</el-menu-item
+            >
           </el-submenu>
 
           <el-menu-item index="/admin/comment">

@@ -12,6 +12,9 @@
       <el-form-item label="价格">
         <el-input v-model="form.price" placeholder="请输价格" />
       </el-form-item>
+      <el-form-item label="描述">
+        <el-input v-model="form.details" placeholder="详细描述" />
+      </el-form-item>
 
       <el-form-item label="类型">
         <el-radio v-model="form.classify" label="出售">出售</el-radio>
@@ -32,6 +35,7 @@ export default {
   data() {
     return {
       form: {
+        details:"",
         price: "",
         title: "",
         content: "",
@@ -73,6 +77,7 @@ export default {
         path: "/idle/add",
         method: "post",
         params: {
+          details:this.form.details,
           price: this.form.price,
           title: this.form.title,
           createTime: `${date.getFullYear()}-${

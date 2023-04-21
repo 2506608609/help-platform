@@ -134,6 +134,7 @@ const updatejob = async ctx => {
             title: job.title,
             content: job.content,
             classify: job.classify,
+            details: job.details,
         }
     ).then(rel => {
         if (rel) {
